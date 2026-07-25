@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: Python CI Pipeline
 
 on:
   push:
@@ -17,8 +17,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Show files
-        run: ls -la
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-      - name: Run basic test
-        run: echo "CI Pipeline is working successfully!"
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Run tests
+        run: pytest
